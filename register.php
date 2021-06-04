@@ -2,7 +2,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
-
     <style>
         body {
             background: linear-gradient(45deg, #EECFBA, #C5DDE8);
@@ -12,7 +11,6 @@
             font-size: 140%;
             font-family: Verdana, Georgia, Helvetica, sans-serif;
             color: #20B2AA;
-
         }
 
         fieldset {
@@ -56,12 +54,9 @@
     </style>
 <body>
 <form action="" method="post">
-
-
     <center>
         <fieldset style="width:0px">
             <legend><h3>Register</h3></legend>
-
             <input type="text" name="login" required placeholder="Login"><br>
             <br><input type="email" name="email" required placeholder="E-mail"><br>
             <br><input type="password" name="pass" required placeholder="Password"><br>
@@ -71,35 +66,29 @@
             <hr>
             <input type="submit" value="Submit">&nbsp
             <input type="reset" value="Reset"><br>
-            <font size="2" color="gray" face="Arial">If you have account. Please click <a href="login.php">here</a></font>
+            <font size="2" color="gray" face="Arial">If you have account. Please click <a
+                        href="login.php">here</a></font>
         </fieldset>
     </center>
 </form>
 </body>
 </html>
-
 <?php
 $login = $_POST['login'];
 $email = $_POST['email'];
-$pass = password_hash($_POST['pass'],PASSWORD_BCRYPT);
+$pass = password_hash($_POST['pass'], PASSWORD_BCRYPT);
 $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
 $phnumber = $_POST['phnumber'];
-
 
 $db = new PDO ('mysql:dbname=registeruser;host=127.0.0.1', 'root', 'root');
 $statement = $db->prepare('INSERT INTO user (login, email, pass, firstname, lastname, phnumber)VALUE(:login, :email, :pass, :firstname,:lastname, :phnumber )');
 $statement->bindParam(':login', $login);
 $statement->bindParam(':email', $email);
 $statement->bindParam(':pass', $pass);
-$statement-> bindParam(':firstname',$firstname);
-$statement-> bindParam(':lastname',$lastname);
-$statement-> bindParam(':phnumber',$phnumber);
+$statement->bindParam(':firstname', $firstname);
+$statement->bindParam(':lastname', $lastname);
+$statement->bindParam(':phnumber', $phnumber);
 $statement->execute();
-
-
-
-
-
 ?>
 
